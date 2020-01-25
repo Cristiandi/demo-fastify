@@ -1,0 +1,29 @@
+{
+  "name": "rest-api-fastify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "dev": "nodemon ./src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "fastify": "^2.11.0",
+    "fastify-mongodb": "^2.0.0",
+    "fastify-plugin": "^1.6.0",
+    "knex": "^0.20.8",
+    "mongodb": "^3.5.1",
+    "mysql": "^2.17.1",
+    "pino-pretty": "^3.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
