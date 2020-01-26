@@ -2,6 +2,11 @@
 const { ObjectId } = require('mongodb');
 
 class ProductService {
+  /**
+   * Creates an instance of ProductService.
+   * @param {object} app fastify app
+   * @memberof ProductService
+   */
   constructor(app) {
     if (!app.ready) throw new Error(`can't get .ready from fastify app.`);
     this.app = app;
@@ -48,6 +53,36 @@ class ProductService {
     }
 
     return product;
+  }
+
+  async update({ id, product }) {
+    const before = await this.getOne({ id });
+
+    const { upsertedId } = (await this.collection.updateOne(
+      {
+        _id: ObjectId(id)
+      },
+      {
+        $set: product
+      },
+      {
+        upsert: true
+      }
+    ));
+
+    const after = await this.getOne({ id });
+
+    return after;
+  }
+
+  async delete({ id }) {
+    const before = await this.getOne({ id });
+    
+    await this.collection.deleteOne({ _id: ObjectId(id) });
+
+    delete before._id;
+
+    return before;
   }
 }
 

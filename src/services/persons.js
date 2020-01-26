@@ -90,11 +90,6 @@ class PersonService {
    */
   async update({ id, person = {} }) {
     const err = new Error();
-
-    if (!id) {
-      err.message = 'id is needed';
-      err.statusCode = 400;
-    }
     
     const personBefore = await this.getOne({ id });
 
@@ -122,11 +117,6 @@ class PersonService {
    */
   async delete({ id }) {
     const err = new Error();
-
-    if (!id) {
-      err.message = 'id is needed';
-      err.statusCode = 400;
-    }
 
     const personBefore = await this.getOne({ id });
 

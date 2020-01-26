@@ -36,6 +36,32 @@ const productRoutes = async (app, options) => {
     
     return product;
   });
+
+  // update
+  app.patch('/:productId', { schema: updateSchema }, async (request, reply) => {
+    const { params: { productId } } = request;
+
+    const { body } = request;
+
+    app.log.info('productId', productId);
+    app.log.info('body', body);
+
+    const updated = await productService.update({ id: productId, product: body });
+
+    return updated;
+  });
+
+  // delete
+  app.delete('/:productId', { schema: deleteSchema }, async (request, reply) => {
+    const { params: { productId } } = request;
+
+    app.log.info('productId', productId);
+
+    const deleted = await productService.delete({ id: productId });
+
+
+    return deleted;
+  });
 };
 
 module.exports = productRoutes;
