@@ -1,4 +1,4 @@
-const { APP_PORT } = require('./environment');
+const { APP_PORT } = require('../../../environment');
 
 module.exports = {
   routePrefix: '/documentation',
@@ -15,9 +15,9 @@ module.exports = {
     },
     servers: [
       { url: `http://localhost:${APP_PORT}`, description: 'local development' },
-      { url: 'https://<development-url>', description: 'development' },
-      { url: 'https://<staging-url>', description: 'staging' },
-      { url: 'https://<production-url>', description: 'production' }
+      { url: 'https://dev.your-site.com', description: 'development' },
+      { url: 'https://sta.your-site.com', description: 'staging' },
+      { url: 'https://pro.your-site.com', description: 'production' }
     ],
     schemes: ['http'],
     consumes: ['application/json'],
