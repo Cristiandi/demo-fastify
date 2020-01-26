@@ -1,4 +1,4 @@
-const oas = require('fastify-oas');
+const oas = require('fastify-swagger');
 
 const apiRoutes = async (app, options) => {
   app.register(oas, require('../../docs-config'));
