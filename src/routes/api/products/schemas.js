@@ -6,6 +6,8 @@ const productProperties = {
   price: { type: 'number', maximum: 9999999999 }
 };
 
+const tags = ['product'];
+
 const paramsJsonSchema = {
   type: 'object',
   properties: {
@@ -34,6 +36,7 @@ const bodyUpdateJsonSchema = {
 };
 
 const getAllSchema = {
+  tags,
   querystring: queryStringJsonSchema,
   response: {
     200: {
@@ -47,6 +50,7 @@ const getAllSchema = {
 };
 
 const getOneSchema = {
+  tags,
   params: paramsJsonSchema,
   querystring: queryStringJsonSchema,
   response: {
@@ -58,6 +62,7 @@ const getOneSchema = {
 };
 
 const createSchema = {
+  tags,
   body: bodyCreateJsonSchema,
   response: {
     201: {
@@ -68,6 +73,7 @@ const createSchema = {
 };
 
 const updateSchema = {
+  tags,
   params: paramsJsonSchema,
   body: bodyUpdateJsonSchema,
   response: {
@@ -79,6 +85,7 @@ const updateSchema = {
 };
 
 const deleteSchema = {
+  tags,
   params: paramsJsonSchema,
   response: {
     200: {

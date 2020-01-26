@@ -19,6 +19,7 @@
     "dotenv": "^8.2.0",
     "fastify": "^2.11.0",
     "fastify-mongodb": "^2.0.0",
+    "fastify-oas": "^2.5.0",
     "fastify-plugin": "^1.6.0",
     "knex": "^0.20.8",
     "mongodb": "^3.5.1",

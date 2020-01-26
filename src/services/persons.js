@@ -1,6 +1,11 @@
 const { isEmptyObject } = require('../utils/functions');
 
 class PersonService {
+  /**
+   * Creates an instance of PersonService.
+   * @param {object} app fastify app
+   * @memberof PersonService
+   */
   constructor (app) {
     if (!app.ready) throw new Error(`can't get .ready from fastify app.`);
     this.app = app;
@@ -82,7 +87,7 @@ class PersonService {
   }
 
   /**
-   * function to update
+   * function to update one
    *
    * @param {{ id: number, person: object }} { id, person = {} }
    * @returns {Promise<{ id: number }>} updated
@@ -106,7 +111,7 @@ class PersonService {
   }
 
   /**
-   * function to delete
+   * function to delete one
    *
    * @param {{ id: number }} { id }
    * @returns {Promise<object>} deleted

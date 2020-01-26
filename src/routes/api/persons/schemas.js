@@ -1,4 +1,5 @@
 const personProperties = {
+  id: { type: 'number' },
   name: { type: 'string' },
   lastName: { type: 'string', nullable: true },
   document: { type: 'string' },
@@ -10,6 +11,8 @@ const personProperties = {
   created_at: { type: 'string' },
   updated_at: { type: 'string' }
 };
+
+const tags = ['person'];
 
 const paramsJsonSchema = {
   type: 'object',
@@ -39,6 +42,7 @@ const bodyUpdateJsonSchema = {
 };
 
 const getAllSchema = {
+  tags,
   querystring: queryStringJsonSchema,
   response: {
     200: {
@@ -52,6 +56,7 @@ const getAllSchema = {
 };
 
 const getOneSchema = {
+  tags,
   params: paramsJsonSchema,
   querystring: queryStringJsonSchema,
   response: {
@@ -63,6 +68,7 @@ const getOneSchema = {
 };
 
 const createSchema = {
+  tags,
   body: bodyCreateJsonSchema,
   response: {
     201: {
@@ -73,6 +79,7 @@ const createSchema = {
 };
 
 const updateSchema = {
+  tags,
   params: paramsJsonSchema,
   body: bodyUpdateJsonSchema,
   response: {
@@ -84,6 +91,7 @@ const updateSchema = {
 };
 
 const deleteSchema = {
+  tags,
   params: paramsJsonSchema,
   response: {
     200: {

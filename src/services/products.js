@@ -20,6 +20,13 @@ class ProductService {
     this.collection = collection;
   }
 
+  /**
+   * function to create one
+   *
+   * @param {{ product: object }} { product }
+   * @returns {Promise<{ id: number }>} created
+   * @memberof ProductService
+   */
   async create ({ product }) {
     const { insertedId } = (await this.collection.insertOne(product));
 
@@ -28,12 +35,26 @@ class ProductService {
     return created;
   }
 
+  /**
+   * function to get all
+   *
+   * @param {{ filter: object }} { filter = {} }
+   * @returns {Promise<{ id: number }> []} array
+   * @memberof ProductService
+   */
   async getAll ({ filter = {} }) {
     const products = await this.collection.find(filter).toArray();
 
     return products;
   }
 
+  /**
+   * function to get one
+   *
+   * @param {{ id: number }} { id }
+   * @returns {Promise<{ id: number }>}
+   * @memberof ProductService
+   */
   async getOne ({ id }) {
     const err = new Error();
 
@@ -54,6 +75,13 @@ class ProductService {
     return product;
   }
 
+  /**
+   * function to update one
+   *
+   * @param {{ id: number, product: object }} { id, product }
+   * @returns {Promise<{ id: number }>} updated
+   * @memberof ProductService
+   */
   async update ({ id, product }) {
     await this.getOne({ id });
 
@@ -74,6 +102,13 @@ class ProductService {
     return after;
   }
 
+  /**
+   * function to delete one
+   *
+   * @param {{ id: number }} { id }
+   * @returns {Promise<object>} deleted
+   * @memberof ProductService
+   */
   async delete ({ id }) {
     const before = await this.getOne({ id });
 
