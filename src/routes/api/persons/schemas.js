@@ -11,13 +11,12 @@ const personProperties = {
   updated_at: { type: 'string' }
 };
 
-
 const paramsJsonSchema = {
   type: 'object',
   properties: {
     personId: { type: 'number' }
   },
-  required: [ 'personId' ]
+  required: ['personId']
 };
 
 const queryStringJsonSchema = {
@@ -25,7 +24,7 @@ const queryStringJsonSchema = {
   properties: {
     filter: { type: 'string' }
   },
-  required: [ 'filter' ]
+  required: ['filter']
 };
 
 const bodyCreateJsonSchema = {
@@ -33,7 +32,6 @@ const bodyCreateJsonSchema = {
   properties: personProperties,
   required: ['name', 'document', 'genre', 'phone']
 };
-
 
 const bodyUpdateJsonSchema = {
   type: 'object',
@@ -45,7 +43,7 @@ const getAllSchema = {
   response: {
     200: {
       type: 'array',
-      items: { 
+      items: {
         type: 'object',
         properties: personProperties
       }

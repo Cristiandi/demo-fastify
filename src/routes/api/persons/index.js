@@ -7,7 +7,7 @@ const personRoutes = async (app, options) => {
   // create
   app.post('/', { schema: createSchema }, async (request, reply) => {
     const { body } = request;
-    
+
     const created = await personService.create({ person: body });
 
     return created;

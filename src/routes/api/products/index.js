@@ -5,7 +5,7 @@ const {
   getOneSchema,
   updateSchema,
   deleteSchema
- } = require('./schemas');
+} = require('./schemas');
 
 const productRoutes = async (app, options) => {
   const productService = new ProductService(app);
@@ -33,7 +33,7 @@ const productRoutes = async (app, options) => {
     app.log.info('productId', productId);
 
     const product = await productService.getOne({ id: productId });
-    
+
     return product;
   });
 
@@ -58,7 +58,6 @@ const productRoutes = async (app, options) => {
     app.log.info('productId', productId);
 
     const deleted = await productService.delete({ id: productId });
-
 
     return deleted;
   });

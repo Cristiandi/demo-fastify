@@ -1,4 +1,3 @@
-
 const { ObjectId } = require('mongodb');
 
 class ProductService {
@@ -7,11 +6,11 @@ class ProductService {
    * @param {object} app fastify app
    * @memberof ProductService
    */
-  constructor(app) {
+  constructor (app) {
     if (!app.ready) throw new Error(`can't get .ready from fastify app.`);
     this.app = app;
     const { mongo } = this.app;
-    
+
     if (!mongo) {
       throw new Error('cant get .mongo from fastify app.');
     }
@@ -21,7 +20,7 @@ class ProductService {
     this.collection = collection;
   }
 
-  async create({ product }) {   
+  async create ({ product }) {
     const { insertedId } = (await this.collection.insertOne(product));
 
     const created = await this.getOne({ id: insertedId });
@@ -29,21 +28,21 @@ class ProductService {
     return created;
   }
 
-  async getAll({ filter = {} }) {
+  async getAll ({ filter = {} }) {
     const products = await this.collection.find(filter).toArray();
 
     return products;
   }
 
-  async getOne({ id }) {
+  async getOne ({ id }) {
     const err = new Error();
 
-    if (!id)  {
+    if (!id) {
       err.statusCode = 400;
       err.message = 'id is needed.';
       throw err;
     }
-    
+
     const product = await this.collection.findOne({ _id: ObjectId(id) });
 
     if (!product) {
@@ -55,8 +54,8 @@ class ProductService {
     return product;
   }
 
-  async update({ id, product }) {
-    const before = await this.getOne({ id });
+  async update ({ id, product }) {
+    await this.getOne({ id });
 
     const { upsertedId } = (await this.collection.updateOne(
       {
@@ -70,14 +69,14 @@ class ProductService {
       }
     ));
 
-    const after = await this.getOne({ id });
+    const after = await this.getOne({ upsertedId });
 
     return after;
   }
 
-  async delete({ id }) {
+  async delete ({ id }) {
     const before = await this.getOne({ id });
-    
+
     await this.collection.deleteOne({ _id: ObjectId(id) });
 
     delete before._id;

@@ -1,12 +1,12 @@
 const { isEmptyObject } = require('../utils/functions');
 
 class PersonService {
-  constructor(app) {
+  constructor (app) {
     if (!app.ready) throw new Error(`can't get .ready from fastify app.`);
     this.app = app;
 
     const { knex } = this.app;
-    
+
     if (!knex) {
       throw new Error('cant get .knex from fastify app.');
     }
@@ -19,7 +19,7 @@ class PersonService {
    * @returns {Promise<number>} created id
    * @memberof PersonService
    */
-  async create({ person }) {
+  async create ({ person }) {
     const err = new Error();
     if (!person) {
       err.statusCode = 400;
@@ -43,7 +43,7 @@ class PersonService {
    * @returns {Promise<{ id: number }>[]} array
    * @memberof PersonService
    */
-  async getAll({ filter = {} }) {
+  async getAll ({ filter = {} }) {
     const { knex } = this.app;
 
     const persons = await knex.select('*').from('Person').where(filter);
@@ -58,7 +58,7 @@ class PersonService {
    * @returns {Promise<{id: number}>} object
    * @memberof PersonService
    */
-  async getOne({ id }) {
+  async getOne ({ id }) {
     const err = new Error();
 
     if (!id) {
@@ -66,7 +66,7 @@ class PersonService {
       err.statusCode = 400;
       throw err;
     }
-    
+
     const { knex } = this.app;
 
     const data = await knex.select('*').from('Person').where({ id });
@@ -77,7 +77,7 @@ class PersonService {
       throw err;
     }
 
-    const [ person ] = data;
+    const [person] = data;
     return person;
   }
 
@@ -88,9 +88,7 @@ class PersonService {
    * @returns {Promise<{ id: number }>} updated
    * @memberof PersonService
    */
-  async update({ id, person = {} }) {
-    const err = new Error();
-    
+  async update ({ id, person = {} }) {
     const personBefore = await this.getOne({ id });
 
     if (isEmptyObject(person)) {
@@ -107,7 +105,6 @@ class PersonService {
     return personAfter;
   }
 
-
   /**
    * function to delete
    *
@@ -115,9 +112,7 @@ class PersonService {
    * @returns {Promise<object>} deleted
    * @memberof PersonService
    */
-  async delete({ id }) {
-    const err = new Error();
-
+  async delete ({ id }) {
     const personBefore = await this.getOne({ id });
 
     const { knex } = this.app;
