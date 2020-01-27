@@ -1,6 +1,3 @@
-const fastifyPlugin = require('fastify-plugin');
-const MongoClient = require('mongodb').MongoClient;
-
 const {
   DB_NOSQL_USER,
   DB_NOSQL_PASSWORD,
@@ -10,17 +7,13 @@ const {
 
 const MONGO_URL = `mongodb+srv://${DB_NOSQL_USER}:${DB_NOSQL_PASSWORD}@${DB_NOSQL_HOST}/${DB_NOSQL_NAME}?retryWrites=true&w=majority`;
 
-const mongoConnector = async (app, options) => {
-  const url = options.url || MONGO_URL;
-  delete options.url;
-
-  const db = await MongoClient.connect(url, {
-    ...options,
-    useUnifiedTopology: true
+const mongoConnector = app => {
+  app.register(require('fastify-mongodb'), {
+    // force to close the mongodb connection when app stopped
+    // the default value is false
+    forceClose: true,
+    url: MONGO_URL
   });
-  app.decorate('mongo', db);
 };
 
-// Wrapping a plugin function with fastify-plugin exposes the decorators,
-// hooks, and middlewares declared inside the plugin to the parent scope.
-module.exports = fastifyPlugin(mongoConnector);
+module.exports = mongoConnector;

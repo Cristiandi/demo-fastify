@@ -1,10 +1,7 @@
-// const oas = require('fastify-oas');
 const { PersonService } = require('../../../services/persons');
 const { createSchema, getAllSchema, getOneSchema, updateSchema, deleteSchema } = require('./schemas');
 
 const personRoutes = async (app, options) => {
-  // app.register(oas, require('../../../docs-config'));
-
   const personService = new PersonService(app);
 
   // create

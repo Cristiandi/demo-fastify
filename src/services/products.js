@@ -15,7 +15,7 @@ class ProductService {
       throw new Error('cant get .mongo from fastify app.');
     }
 
-    const db = mongo.db();
+    const db = mongo.db;
     const collection = db.collection('Product');
     this.collection = collection;
   }

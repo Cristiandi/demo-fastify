@@ -16,8 +16,9 @@ const app = fastify({
 });
 
 // plugins
+require('./plugins/mongo-db-connector')(app);
 app.register(require('./plugins/knex-db-connector'), {});
-app.register(require('./plugins/mongo-db-connector'), {});
+// app.register(require('./plugins/_mongo-db-connector'), {});
 app.register(require('./routes/api'), { prefix: 'api' });
 
 // middlewares
