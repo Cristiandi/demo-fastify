@@ -21,6 +21,12 @@ app.register(require('./plugins/knex-db-connector'), {});
 // app.register(require('./plugins/_mongo-db-connector'), {});
 app.register(require('./routes/api'), { prefix: 'api' });
 
+// hooks
+app.addHook('onClose', (instance, done) => {
+  const { knex } = instance;
+  knex.destroy(() => instance.log.info('knex pool destroyed.'));
+});
+
 // middlewares
 app.use(cors());
 
@@ -32,4 +38,7 @@ app.listen(APP_PORT, (err, address) => {
   }
 
   app.log.info(`server listening on ${address}`);
+
+  process.on('SIGINT', () => app.close());
+  process.on('SIGTERM', () => app.close());
 });
