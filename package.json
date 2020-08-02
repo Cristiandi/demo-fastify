@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/app.js",
-    "dev": "nodemon ./src/app.js",
+    "start": "node --trace-warnings ./src/start.js",
+    "dev": "nodemon ./src/start.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,7 +18,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "fastify": "^2.11.0",
-    "fastify-mongodb": "^2.0.0",
+    "fastify-mongodb": "^2.0.1",
     "fastify-plugin": "^1.6.0",
     "fastify-swagger": "^2.5.0",
     "knex": "^0.20.8",
