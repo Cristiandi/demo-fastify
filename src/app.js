@@ -1,4 +1,4 @@
-const fastify = require('fastify');
+const Fastify = require('fastify');
 const cors = require('cors');
 
 // order to register / load
@@ -8,27 +8,32 @@ const cors = require('cors');
 // 4. hooks and middlewares
 // 5. your services
 
-const app = fastify({
-  bodyLimit: 1048576 * 2,
-  logger: { prettyPrint: true }
-});
+const build = async () => {
+  const fastify = Fastify({
+    bodyLimit: 1048576 * 2,
+    logger: { prettyPrint: true }
+  });
 
-// plugins
-require('./plugins/mongo-db-connector')(app);
-app.register(require('./plugins/knex-db-connector'), {});
-// app.register(require('./plugins/_mongo-db-connector'), {});
-app.register(require('./routes/api'), { prefix: 'api' });
+  // plugins
+  await require('./plugins/mongo-db-connector')(fastify);
 
-// hooks
-app.addHook('onClose', (instance, done) => {
-  const { knex } = instance;
-  knex.destroy(() => instance.log.info('knex pool destroyed.'));
-});
+  await fastify.register(require('fastify-express'));
+  await fastify.register(require('./plugins/knex-db-connector'), {});
+  await fastify.register(require('./routes/api'), { prefix: 'api' });
 
-// middlewares
-app.use(cors());
+  // hooks
+  fastify.addHook('onClose', (instance, done) => {
+    const { knex } = instance;
+    knex.destroy(() => instance.log.info('knex pool destroyed.'));
+  });
+
+  // middlewares
+  fastify.use(cors());
+
+  return fastify;
+};
 
 // implement inversion of control to make the code testable
 module.exports = {
-  app
+  build
 };
