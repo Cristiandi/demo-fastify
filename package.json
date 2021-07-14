@@ -23,7 +23,7 @@
     "fastify-plugin": "^3.0.0",
     "fastify-swagger": "^4.0.0",
     "knex": "^0.95.0",
-    "mongodb": "^3.5.1",
+    "mongodb": "^4.0.0",
     "mysql": "^2.17.1",
     "pino-pretty": "^5.0.0"
   },
