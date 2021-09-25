@@ -34,6 +34,6 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "5.1.0",
     "eslint-plugin-standard": "4.1.0",
-    "nodemon": "2.0.12"
+    "nodemon": "2.0.13"
   }
 }
