@@ -28,7 +28,7 @@
     "pino-pretty": "^7.0.0"
   },
   "devDependencies": {
-    "eslint": "8.3.0",
+    "eslint": "8.4.1",
     "eslint-config-standard": "16.0.3",
     "eslint-plugin-import": "2.25.3",
     "eslint-plugin-node": "11.1.0",
