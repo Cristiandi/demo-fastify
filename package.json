@@ -21,7 +21,7 @@
     "fastify-express": "^0.3.0",
     "fastify-mongodb": "^4.0.0",
     "fastify-plugin": "^3.0.0",
-    "fastify-swagger": "^4.0.0",
+    "fastify-swagger": "^5.0.0",
     "knex": "^0.95.0",
     "mongodb": "^4.0.0",
     "mysql": "^2.17.1",
